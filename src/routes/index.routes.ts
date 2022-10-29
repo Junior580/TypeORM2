@@ -3,4 +3,4 @@ import { createUser } from "./createUser.routes";
 
 export const routes = Router();
 
-routes.use("/createUser", createUser);
+routes.use("/users", createUser);
