@@ -1,22 +1,34 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm'
+import { Comment } from './Coments'
 
-@Entity("user")
+@Entity('user')
 export class User {
-    @PrimaryColumn()
-    id: string;
+  @PrimaryGeneratedColumn()
+  id: string
 
-    @Column()
-    name: string;
+  @Column()
+  name: string
 
-    @Column()
-    email: string;
+  @Column()
+  email: string
 
-    @Column()
-    password: string;
+  @Column()
+  password: string
 
-    @CreateDateColumn()
-    created_at: Date;
+  @CreateDateColumn()
+  created_at: Date
 
-    @CreateDateColumn()
-    updated_at: Date;
+  @CreateDateColumn()
+  updated_at: Date
+
+  @OneToOne(() => Comment)
+  @JoinColumn()
+  comment: Comment
 }
