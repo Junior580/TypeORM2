@@ -1,16 +1,8 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm'
-import { Comment } from './Coments'
+import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm'
 
 @Entity('user')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: string
 
   @Column()
@@ -27,8 +19,4 @@ export class User {
 
   @CreateDateColumn()
   updated_at: Date
-
-  @OneToOne(() => Comment)
-  @JoinColumn()
-  comment: Comment
 }

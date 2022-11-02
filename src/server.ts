@@ -1,21 +1,21 @@
-import express from "express";
-import { AppDataSource } from "./database/data-source";
-import { routes } from "./routes/index.routes";
+import express from 'express'
+import { AppDataSource } from './database/data-source'
+import { routes } from './routes/index.routes'
 
-const app = express();
+const app = express()
 
-app.use(express.json());
-app.use(routes);
+app.use(express.json())
+app.use(routes)
 
 AppDataSource.initialize()
-    .then(() => {
-        console.log("📦 Data Source has been initialized!");
+  .then(() => {
+    console.log('📦 Data Source has been initialized!')
+  })
+  .then(() => {
+    return app.listen(3000, () => {
+      console.log('🚀 Server is running!')
     })
-    .then(() => {
-        return app.listen(3000, () => {
-            console.log("🚀 Server is running!");
-        });
-    })
-    .catch(err => {
-        console.error("❌ Error during Data Source initialization", err);
-    });
+  })
+  .catch(err => {
+    console.error('❌ Error during Data Source initialization', err)
+  })

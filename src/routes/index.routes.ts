@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { createUser } from "./createUser.routes";
+import { Router } from 'express'
+import { createUser } from './createUser.routes'
 
-export const routes = Router();
+export const routes = Router()
 
-routes.use("/users", createUser);
+routes.use('/users', createUser)
