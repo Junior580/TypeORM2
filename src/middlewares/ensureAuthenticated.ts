@@ -18,7 +18,7 @@ export async function ensureAuthenticated(
   try {
     const { secret } = jwt
 
-    const decoded = await verify(token, secret)
+    verify(token, secret)
 
     return next()
   } catch (error) {
