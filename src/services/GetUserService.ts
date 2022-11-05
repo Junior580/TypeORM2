@@ -1,13 +1,11 @@
 import { userRepository } from '../repositories/userRepository'
 
-interface IRequest {
-  name: string
-  email: string
-  password: string
-}
 export class GetUserSerice {
   public async execute() {
     const user = await userRepository.find()
+    if (user.length === 0) {
+      throw new Error('Nothing user exists!')
+    }
 
     return user
   }
