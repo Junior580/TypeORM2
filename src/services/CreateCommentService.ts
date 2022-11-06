@@ -13,5 +13,7 @@ export class CreateCommentService {
     if (!userID) {
       throw new Error('User does not Exists!')
     }
+
+    return userID
   }
 }
