@@ -1,16 +1,9 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  OneToMany,
-} from 'typeorm'
-import { Comment } from './Comment'
+import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm'
 
-@Entity('user')
+@Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number
+  @PrimaryColumn()
+  id: string
 
   @Column()
   name: string
@@ -26,10 +19,4 @@ export class User {
 
   @CreateDateColumn()
   updated_at: Date
-
-  @OneToMany(() => Comment, comment => comment.user, {
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  comment: Comment[]
 }

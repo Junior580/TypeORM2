@@ -1,6 +1,6 @@
 import { User } from '../app/models/User'
 import { userRepository } from '../repositories/userRepository'
-// import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid'
 import { hash } from 'bcryptjs'
 
 interface IRequest {
@@ -19,7 +19,7 @@ export class CreateUserSerice {
     const hashedPass = await hash(password, 8)
 
     const user = userRepository.create({
-      // id: uuid(),
+      id: uuid(),
       name,
       email,
       password: hashedPass,
