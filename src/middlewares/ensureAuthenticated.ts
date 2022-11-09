@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 import { jwt } from '../config/auth'
+import AppError from '../errors/AppError'
 
 export async function ensureAuthenticated(
   req: Request,
@@ -10,7 +11,8 @@ export async function ensureAuthenticated(
   const { authorization } = req.headers
 
   if (!authorization) {
-    return res.status(401).json({ Unauthorized: 'Unauthorized access' })
+    throw new AppError('Unauthorized access', 401)
+    // return res.status(401).json({ Unauthorized: 'Unauthorized access' })
   }
 
   const [, token] = authorization.split(' ')
@@ -22,6 +24,6 @@ export async function ensureAuthenticated(
 
     return next()
   } catch (error) {
-    return res.status(401).json({ Unauthorized: 'JWT token is missing!' })
+    throw new AppError('Invalid JWT token', 401)
   }
 }
