@@ -1,19 +1,33 @@
 import { userRepository } from '../repositories/userRepository'
 import { commentRepository } from '../repositories/commentRepository'
+import { Comment } from '../app/models/Comment'
+import { v4 as uuid } from 'uuid'
+import AppError from '../errors/AppError'
 
 interface IRequest {
   comment: string
-  user_id: number
+  id: string
 }
 
 export class CreateCommentService {
-  async execute({ comment, user_id }: IRequest) {
-    const userID = await userRepository.findOneBy({ id: user_id })
+  public async execute({ id, comment }: IRequest): Promise<Comment> {
+    const userID = await userRepository.findOneBy({ id })
 
     if (!userID) {
-      throw new Error('User does not Exists!')
+      throw new AppError('User does not Exists!', 401)
     }
 
-    return userID
+    if (!comment) {
+      throw new AppError('Comment is madatory!', 401)
+    }
+
+    const userComment = commentRepository.create({
+      id: uuid(),
+      comments: comment,
+    })
+
+    await commentRepository.save(userComment)
+
+    return userComment
   }
 }

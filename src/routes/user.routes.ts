@@ -5,6 +5,7 @@ import { CreateUserController } from '../controllers/CreateUserController'
 import { AuthUserController } from '../controllers/AuthUserController'
 import { DeleteUserController } from '../controllers/DeleteUserController'
 import { UpdateUserController } from '../controllers/UpdateUserController'
+import { CreateCommentController } from '../controllers/CommentUserController'
 
 export const createUser = Router()
 
@@ -12,6 +13,8 @@ export const createUser = Router()
 createUser.post('/', new CreateUserController().handle)
 //route to auth user
 createUser.post('/login', new AuthUserController().handle)
+
+createUser.post('/login/:id/comments', new CreateCommentController().handle)
 
 //route to get user, you need JWT token
 createUser.get('/login', ensureAuthenticated, new GetUserController().handle)

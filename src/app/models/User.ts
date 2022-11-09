@@ -1,6 +1,13 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm'
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  CreateDateColumn,
+  OneToMany,
+} from 'typeorm'
 
-@Entity()
+import { Comment } from './Comment'
+@Entity('users')
 export class User {
   @PrimaryColumn()
   id: string
@@ -19,4 +26,7 @@ export class User {
 
   @CreateDateColumn()
   updated_at: Date
+
+  @OneToMany(() => Comment, comment => comment.user)
+  comment: Comment[]
 }

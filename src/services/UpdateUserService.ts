@@ -1,5 +1,6 @@
 import { userRepository } from '../repositories/userRepository'
 import { hash } from 'bcryptjs'
+import AppError from '../errors/AppError'
 
 interface IRequest {
   id: string
@@ -15,11 +16,11 @@ export class UpdateUserService {
     const emailExists = await userRepository.findOneBy({ email })
 
     if (!user) {
-      throw new Error('User does not exists!')
+      throw new AppError('User does not exists!', 401)
     }
 
     if (emailExists) {
-      throw new Error('Email already exists!')
+      throw new AppError('Email already exists!', 401)
     }
 
     const hashedPass = await hash(password, 8)

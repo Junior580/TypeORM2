@@ -2,6 +2,7 @@ import { User } from '../app/models/User'
 import { userRepository } from '../repositories/userRepository'
 import { v4 as uuid } from 'uuid'
 import { hash } from 'bcryptjs'
+import AppError from '../errors/AppError'
 
 interface IRequest {
   name: string
@@ -13,7 +14,7 @@ export class CreateUserSerice {
     const userExists = await userRepository.findOneBy({ email })
 
     if (userExists) {
-      throw new Error('User already exists!')
+      throw new AppError('User already exists!', 401)
     }
 
     const hashedPass = await hash(password, 8)
