@@ -1,6 +1,7 @@
+import 'express-async-errors'
 import { Request, Response, NextFunction } from 'express'
 
-export function middlerwareError(
+export function handleError(
   error: Error,
   req: Request,
   res: Response,

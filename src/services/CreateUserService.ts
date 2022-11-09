@@ -26,6 +26,7 @@ export class CreateUserSerice {
     })
 
     await userRepository.save(user)
+
     return user
   }
 }

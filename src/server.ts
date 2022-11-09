@@ -1,19 +1,15 @@
-import 'express-async-errors'
 import express from 'express'
 import { AppDataSource } from './database/data-source'
-import { middlerwareError } from './middlewares/errorMiddleware'
+import { handleError } from './middlewares/HandleError'
 import { routes } from './routes/index.routes'
 
 const app = express()
 
-app.get('/', (req, res) => {
-  throw new Error('erro new error')
-})
-
 app.use(express.json())
+
 app.use(routes)
 
-app.use(middlerwareError)
+app.use(handleError)
 
 AppDataSource.initialize()
   .then(() => {

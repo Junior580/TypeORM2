@@ -13,6 +13,7 @@ interface IGet {
 export class AuthUserService {
   public async execute({ email, password }: IGet): Promise<string> {
     const user = await userRepository.findOneBy({ email })
+
     if (!user) {
       throw new Error('Email/password is wrong.')
     }
@@ -25,6 +26,7 @@ export class AuthUserService {
     const id = user.id
 
     const { secret, expiresIn } = jwt
+
     const token = sign({ id }, secret, {
       expiresIn,
     })
