@@ -22,7 +22,7 @@ export class Comment {
   @CreateDateColumn()
   updated_at: Date
 
-  @ManyToOne(() => User, user => user.comments)
+  @ManyToOne(() => User, user => user.comments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User
 }

@@ -27,6 +27,6 @@ export class User {
   @CreateDateColumn()
   updated_at: Date
 
-  @OneToMany(() => Comment, comment => comment.user)
+  @OneToMany(() => Comment, comment => comment.user, { cascade: true })
   comments: Comment[]
 }

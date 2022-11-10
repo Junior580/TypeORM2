@@ -6,7 +6,7 @@ export class GetCommentService {
     const comment = await commentRepository.find({})
 
     if (comment.length === 0) {
-      throw new AppError('Nothing user exists!', 401)
+      throw new AppError('Nothing comment exists!', 401)
     }
     return comment
   }
