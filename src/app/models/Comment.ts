@@ -1,9 +1,10 @@
 import {
   Entity,
-  PrimaryColumn,
   Column,
   CreateDateColumn,
   ManyToOne,
+  JoinColumn,
+  PrimaryColumn,
 } from 'typeorm'
 import { User } from './User'
 
@@ -21,6 +22,7 @@ export class Comment {
   @CreateDateColumn()
   updated_at: Date
 
-  @ManyToOne(() => User, user => user.comment)
+  @ManyToOne(() => User, user => user.comments)
+  @JoinColumn({ name: 'user_id' })
   user: User
 }

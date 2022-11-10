@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 
 import { Comment } from './Comment'
-@Entity('users')
+@Entity('user')
 export class User {
   @PrimaryColumn()
   id: string
@@ -28,5 +28,5 @@ export class User {
   updated_at: Date
 
   @OneToMany(() => Comment, comment => comment.user)
-  comment: Comment[]
+  comments: Comment[]
 }

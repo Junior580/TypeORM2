@@ -9,7 +9,11 @@ export function handleError(
   next: NextFunction
 ) {
   if (error instanceof AppError) {
-    return res.status(error.statusCode).send({ Error: error.message })
+    return res
+      .status(error.statusCode)
+      .send({ status: 'error', message: error.message })
   }
-  return res.status(500).send({ msg: error })
+  return res
+    .status(500)
+    .send({ status: 'error', message: 'Internal server error', error })
 }
