@@ -8,7 +8,7 @@ export class CreateCommentController {
 
     const userComment = new CreateCommentService()
 
-    const comment = await userComment.execute({ id, comments })
+    const comment = await userComment.execute({ user_id: id, comments })
 
     return res.status(201).json(comment)
   }
