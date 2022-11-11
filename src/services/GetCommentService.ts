@@ -1,32 +1,24 @@
 import AppError from '../errors/AppError'
-// import { commentRepository } from '../repositories/commentRepository'
-import { userRepository } from '../repositories/userRepository'
+import { commentRepository } from '../repositories/commentRepository'
 
 export class GetCommentService {
   public async execute() {
-    // const comment = await commentRepository.find({
-    //   relations: { user: true },
-    // })
-
-    const user = await userRepository.find({
-      relations: {
-        comments: true,
-      },
+    const comment = await commentRepository.find({
+      relations: { user: true },
     })
-    console.log(user)
-    let i = 0
 
-    while (i < user.length) {
-      console.log(user[i].name)
-      console.log(user[i].comments[0].comments)
+    const userReturn = comment.map(item => {
+      const container = {
+        name: item.user.name,
+        comment: [item.comments, item.comments],
+      }
+      return container
+    })
 
-      i++
-    }
-
-    if (user.length === 0) {
+    if (comment.length === 0) {
       throw new AppError('Nothing comment exists!', 401)
     }
-
-    return user
+    console.log(userReturn)
+    return userReturn
   }
 }
