@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import { hash } from 'bcryptjs'
 import AppError from '../errors/AppError'
 
-interface IRequest {
+export interface IRequest {
   name: string
   email: string
   password: string
